@@ -164,7 +164,13 @@ eval { require Carp::Heavy; };
 require Symbol if $] < 5.006;
 
 ### For the OO interface
-use parent 0.221 qw/ IO::Handle IO::Seekable /;
+#use parent 0.221 qw/ IO::Handle IO::Seekable /; ## Win32 Perl 5.8 is missing "parent"
+our @ISA;
+BEGIN {
+    require IO::Handle;
+    require IO::Seekable;
+    push @ISA, qw/ IO::Handle IO::Seekable /;
+}
 use overload '""' => "STRINGIFY", '0+' => "NUMIFY",
   fallback => 1;
 
