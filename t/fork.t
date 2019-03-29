@@ -15,7 +15,7 @@ BEGIN {
   if ( $can_fork && !(($^O eq 'MSWin32') && $Devel::Cover::VERSION) ) {
     print "1..8\n";
   } else {
-    if ( !$Devel::Cover::VERSION ) {
+    if ( ($^O eq 'MSWin32') && $Devel::Cover::VERSION ) {
         print "1..0 # Skip Devel::Cover coverage testing is incompatible with fork under 'MSWin32'\n";
     } else {
         print "1..0 # Skip No fork available\n";
